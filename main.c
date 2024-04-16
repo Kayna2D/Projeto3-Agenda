@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-  int opcao = 1;
+  int opcao;
   do {
     printf("\nMenu principal\n");
     printf("1 - Criar tarefa\n");
@@ -9,5 +9,7 @@ int main() {
     printf("3 - Listar tarefas\n");
     printf("0 - Sair\n");
     printf("Entre com uma opção: ");
+    int i = scanf("%d", &opcao);
+     printf("Opção escolhida: %d\n", opcao);
   } while (opcao != 0);    
 }

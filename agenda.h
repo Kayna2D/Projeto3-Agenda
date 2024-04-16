@@ -7,6 +7,14 @@ typedef struct Contato {
   char telefone[11];
 } Contato;
 
-void criar(Contato agenda[], int *pos);
-void listar(Contato agenda[], int pos);
-void deletar(Contato agenda[], int *pos);
+typedef enum Erros {
+  OK,
+  MAX_CONTATOS,
+  SEM_TAREFAS
+} Erro;
+
+Erro criar(Contato agenda[], int *pos);
+Erro listar(Contato agenda[], int pos);
+Erro deletar(Contato agenda[], int *pos);
+
+void clearBuffer();

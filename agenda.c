@@ -2,14 +2,36 @@
 #include <stdio.h>
 #include <string.h>
 
-void criar(Contato agenda[], int *pos) {
-  printf("Criar\n");
+Erro criar(Contato agenda[], int *pos) {
+  if (*pos >= TOTAL)
+    return MAX_CONTATOS;
+
+  printf("Entre com o nome: ");
+  
+  printf("Entre com o sobrenome: ");
+  
+  printf("Entre com o e-mail: ");
+  
+  printf("Entre com o telefone (apenas numeros): ");
+  
+
+  return OK;
 }
 
-void listar(Contato agenda[], int pos) {
+Erro listar(Contato agenda[], int pos) {
   printf("Listar\n");
+
+  return OK;
 }
 
-void deletar(Contato agenda[], int *pos) {
+Erro deletar(Contato agenda[], int *pos) {
   printf("Deletar\n");
+
+  return OK;
+}
+
+void clearBuffer() {
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF)
+    ;
 }

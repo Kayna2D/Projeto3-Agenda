@@ -10,6 +10,6 @@ int main() {
     printf("0 - Sair\n");
     printf("Entre com uma opção: ");
     int i = scanf("%d", &opcao);
-     printf("Opção escolhida: %d\n", opcao);
+    printf("Opção escolhida: %d\n", opcao);
   } while (opcao != 0);    
 }

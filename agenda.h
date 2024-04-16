@@ -1,4 +1,4 @@
-#define TOTAL 255;
+#define TOTAL 255
 
 typedef struct Contato {
   char nome[100];

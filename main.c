@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include "agenda.h"
 
 int main() {
   int opcao;
+  Contato agenda[TOTAL];
   do {
     printf("\nMenu principal\n");
     printf("1 - Criar tarefa\n");

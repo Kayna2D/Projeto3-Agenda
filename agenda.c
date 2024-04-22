@@ -7,14 +7,23 @@ Erro criar(Contato agenda[], int *pos) {
     return MAX_CONTATOS;
 
   printf("Entre com o nome: ");
+  scanf("%[^\n]", agenda[*pos].nome);
+  clearBuffer();
   
   printf("Entre com o sobrenome: ");
+  scanf("%[^\n]", agenda[*pos].sobrenome);
+  clearBuffer();
   
   printf("Entre com o e-mail: ");
+  scanf("%[^\n]", agenda[*pos].email);
+  clearBuffer();
   
   printf("Entre com o telefone (apenas numeros): ");
+  scanf("%[^\n]", agenda[*pos].telefone);
+  clearBuffer();
   
-
+  *pos = *pos + 1;
+  
   return OK;
 }
 

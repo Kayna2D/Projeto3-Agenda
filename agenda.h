@@ -2,11 +2,21 @@
 
 typedef struct Contato {
   char nome[100];
-  char sobrnome[300];
+  char sobrenome[300];
   char email[300];
   char telefone[11];
 } Contato;
 
-void criar(Contato agenda[], int *pos);
-void listar(Contato agenda[], int pos);
-void deletar(Contato agenda[], int *pos);
+typedef enum Erros {
+  OK,
+  MAX_CONTATOS,
+  SEM_CONTATOS
+} Erro;
+
+typedef Erro (*funcao)(Contato[], int*);
+
+Erro criar(Contato agenda[], int *pos);
+Erro listar(Contato agenda[], int *pos);
+Erro deletar(Contato agenda[], int *pos);
+
+void clearBuffer();

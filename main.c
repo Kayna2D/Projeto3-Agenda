@@ -24,15 +24,17 @@ int main() {
       printf("Opção inválida\n");
     else if (opcao >= 0) {
       erro = fs[opcao](agenda, &pos);
-      if (opcao == 0)
+      if (opcao == 0){
         if (erro == MAX_CONTATOS)
           printf("Numero maximo de contatos atingido\n");
         else
           printf("Contato criado com sucesso\n");
+      }
         
-      else if (opcao == 1)
-        listar(agenda, pos);
-        
+      else if (opcao == 1){
+        if (erro == SEM_CONTATOS)
+          printf("Não há contatos para listar\n");
+   }
       else if (opcao == 2)
         deletar(agenda, &pos);
     } 

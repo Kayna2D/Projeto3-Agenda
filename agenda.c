@@ -27,8 +27,18 @@ Erro criar(Contato agenda[], int *pos) {
   return OK;
 }
 
-Erro listar(Contato agenda[], int pos) {
-  printf("Listar\n");
+Erro listar(Contato agenda[], int *pos) {
+  if(*pos == 0)
+    return SEM_CONTATOS;
+
+  // for(int i = 0; i < *pos; i++) {
+  //   printf("Nome: %s\n", agenda[i].nome);
+  //   printf("Sobrenome: %s\n", agenda[i].sobrenome);
+  //   printf("E-mail: %s\n", agenda[i].email);
+  //   printf("Telefone: %s\n", agenda[i].telefone);
+  // }
+
+  
 
   return OK;
 }

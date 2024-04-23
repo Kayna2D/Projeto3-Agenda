@@ -10,13 +10,13 @@ typedef struct Contato {
 typedef enum Erros {
   OK,
   MAX_CONTATOS,
-  SEM_TAREFAS
+  SEM_CONTATOS
 } Erro;
 
-typedef Erro (*funcao)(Contato agenda[], int*);
+typedef Erro (*funcao)(Contato[], int*);
 
 Erro criar(Contato agenda[], int *pos);
-Erro listar(Contato agenda[], int pos);
+Erro listar(Contato agenda[], int *pos);
 Erro deletar(Contato agenda[], int *pos);
 
 void clearBuffer();

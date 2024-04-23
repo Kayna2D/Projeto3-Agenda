@@ -45,7 +45,10 @@ Erro listar(Contato agenda[], int *pos) {
 }
 
 Erro deletar(Contato agenda[], int *pos) {
-  printf("Deletar\n");
+  if (*pos == 0)
+    return SEM_CONTATOS;
+
+  
 
   return OK;
 }

@@ -36,7 +36,8 @@ int main() {
           printf("Não há contatos para listar\n");
    }
       else if (opcao == 2)
-        deletar(agenda, &pos);
+        if (erro == SEM_CONTATOS)
+          printf("Não há contatos para deletar\n");
     } 
   } while (opcao >= 0);
     }

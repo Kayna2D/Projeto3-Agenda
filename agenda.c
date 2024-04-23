@@ -48,7 +48,12 @@ Erro deletar(Contato agenda[], int *pos) {
   if (*pos == 0)
     return SEM_CONTATOS;
 
-  
+  int pos_deletar;
+  printf("Entre com a posicao da tarefa a ser deletada: ");
+  scanf("%d", &pos_deletar);
+  pos_deletar--; // garantir posicao certa no array
+  if (pos_deletar >= *pos || pos_deletar < 0)
+    return NAO_ENCONTRADO;
 
   return OK;
 }

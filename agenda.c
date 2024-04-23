@@ -45,7 +45,25 @@ Erro listar(Contato agenda[], int *pos) {
 }
 
 Erro deletar(Contato agenda[], int *pos) {
-  printf("Deletar\n");
+  if (*pos == 0)
+    return SEM_CONTATOS;
+
+  int pos_deletar;
+  printf("Entre com a posicao do contato a ser deletado: ");
+  scanf("%d", &pos_deletar);
+  pos_deletar--; // garantir posicao certa no array
+  if (pos_deletar >= *pos || pos_deletar < 0)
+    return NAO_ENCONTRADO;
+
+  for (int i = pos_deletar; i < *pos; i++)
+    {
+      strcpy(agenda[i].nome, agenda[i + 1].nome);
+      strcpy(agenda[i].sobrenome, agenda[i + 1].sobrenome);
+      strcpy(agenda[i].email, agenda[i + 1].email);
+      strcpy(agenda[i].telefone, agenda[i + 1].telefone);
+    }
+
+    *pos = *pos - 1;
 
   return OK;
 }

@@ -10,7 +10,8 @@ typedef struct Contato {
 typedef enum Erros {
   OK,
   MAX_CONTATOS,
-  SEM_CONTATOS
+  SEM_CONTATOS,
+  NAO_ENCONTRADO
 } Erro;
 
 typedef Erro (*funcao)(Contato[], int*);

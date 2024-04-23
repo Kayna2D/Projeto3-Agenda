@@ -31,12 +31,13 @@ Erro listar(Contato agenda[], int *pos) {
   if(*pos == 0)
     return SEM_CONTATOS;
 
-  // for(int i = 0; i < *pos; i++) {
-  //   printf("Nome: %s\n", agenda[i].nome);
-  //   printf("Sobrenome: %s\n", agenda[i].sobrenome);
-  //   printf("E-mail: %s\n", agenda[i].email);
-  //   printf("Telefone: %s\n", agenda[i].telefone);
-  // }
+  for(int i = 0; i < *pos; i++) {
+    printf("Pos: %d\t", i + 1);
+    printf("Nome: %s\t", agenda[i].nome);
+    printf("Sobrenome: %s\t", agenda[i].sobrenome);
+    printf("E-mail: %s\t", agenda[i].email);
+    printf("Telefone: %s\n", agenda[i].telefone);
+  }
 
   
 

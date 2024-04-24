@@ -18,9 +18,11 @@ Erro criar(Contato agenda[], int *pos) {
   scanf("%[^\n]", agenda[*pos].email);
   clearBuffer();
   
-  printf("Entre com o telefone (apenas numeros): ");
+  printf("Entre com o telefone de 11 digitos (apenas numeros): ");
   scanf("%[^\n]", agenda[*pos].telefone);
   clearBuffer();
+  if (strlen(agenda[*pos].telefone) != 11)
+    return TEL_INVALIDO;
   
   *pos = *pos + 1;
   
@@ -36,7 +38,7 @@ Erro listar(Contato agenda[], int *pos) {
     printf("Nome: %s\t", agenda[i].nome);
     printf("Sobrenome: %s\t", agenda[i].sobrenome);
     printf("E-mail: %s\t", agenda[i].email);
-    printf("Telefone: %s\n", agenda[i].telefone);
+    printf("Telefone: %c%c %c.%c%c%c%c-%c%c%c%c\n", agenda[i].telefone[0], agenda[i].telefone[1], agenda[i].telefone[2], agenda[i].telefone[3], agenda[i].telefone[4], agenda[i].telefone[5], agenda[i].telefone[6], agenda[i].telefone[7], agenda[i].telefone[8], agenda[i].telefone[9], agenda[i].telefone[10]);
   }
 
   

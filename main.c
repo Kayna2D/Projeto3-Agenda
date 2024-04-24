@@ -51,4 +51,13 @@ int main() {
   } while (opcao >= 0);
 
   fs[3](agenda, &pos);
+  Erro erro_salvar = fs[3](agenda, &pos);
+  if (erro_salvar == ABRIR)
+    printf("Erro ao abrir arquivo\n");
+  else if (erro_salvar == ESCREVER)
+    printf("Erro ao salvar no arquivo\n");
+  else if (erro_salvar == FECHAR)
+    printf("Erro ao fechar arquivo\n");
+  else
+    printf("Arquivo salvo com sucesso!\n");
     }

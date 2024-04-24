@@ -70,12 +70,19 @@ Erro deletar(Contato agenda[], int *pos) {
 
 Erro salvar(Contato agenda[], int *pos) {
   FILE *f = fopen("agenda.bin", "wb");
+  if (f == NULL)
+    return ABRIR;
 
   int qtd = fwrite(agenda, TOTAL, sizeof(Contato), f);
+  if (qtd == 0)
+    return ESCREVER;
 
   qtd = fwrite(pos, 1, sizeof(int), f);
-
-  fclose(f);
+  if (qtd == 0)
+    return ESCREVER;
+  
+  if (fclose(f))
+    return FECHAR;
   
   return OK;
 }

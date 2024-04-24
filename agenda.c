@@ -68,6 +68,18 @@ Erro deletar(Contato agenda[], int *pos) {
   return OK;
 }
 
+Erro salvar(Contato agenda[], int *pos) {
+  FILE *f = fopen("agenda", "wb");
+
+  int qtd = fwrite(agenda, TOTAL, sizeof(Contato), f);
+
+  qtd = fwrite(pos, 1, sizeof(int), f);
+
+  fclose(f);
+  
+  return OK;
+}
+
 void clearBuffer() {
   int c;
   while ((c = getchar()) != '\n' && c != EOF)

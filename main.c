@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main() {
-  funcao fs[] = {criar, listar, deletar};
+  funcao fs[] = {criar, listar, deletar, salvar};
 
   int pos;
   Erro erro;
@@ -41,6 +41,9 @@ int main() {
         else if (erro == NAO_ENCONTRADO)
           printf("Contato não encontrado\n");
           }
-    } 
+    } else
+      printf("Saindo...\n");
   } while (opcao >= 0);
+
+  fs[3](agenda, &pos);
     }

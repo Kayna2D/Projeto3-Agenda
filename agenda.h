@@ -19,5 +19,6 @@ typedef Erro (*funcao)(Contato[], int*);
 Erro criar(Contato agenda[], int *pos);
 Erro listar(Contato agenda[], int *pos);
 Erro deletar(Contato agenda[], int *pos);
+Erro salvar(Contato agenda[], int *pos);
 
 void clearBuffer();

@@ -2,12 +2,17 @@
 #include <stdio.h>
 
 int main() {
-  funcao fs[] = {criar, listar, deletar, salvar};
+  funcao fs[] = {criar, listar, deletar, salvar, carregar};
 
   int pos;
-  Erro erro;
-  int opcao;
   Contato agenda[TOTAL];
+  Erro erro = fs[4](agenda, &pos);
+  if(erro == ABRIR){
+    printf("Erro de leitura ou arquivo inexistente");
+    pos = 0;
+  }
+  int opcao;
+  
   do {
     printf("\nMenu principal\n");
     printf("1 - Criar contato\n");

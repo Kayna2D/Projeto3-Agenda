@@ -69,7 +69,7 @@ Erro deletar(Contato agenda[], int *pos) {
 }
 
 Erro salvar(Contato agenda[], int *pos) {
-  FILE *f = fopen("agenda", "wb");
+  FILE *f = fopen("agenda.bin", "wb");
 
   int qtd = fwrite(agenda, TOTAL, sizeof(Contato), f);
 
@@ -77,6 +77,20 @@ Erro salvar(Contato agenda[], int *pos) {
 
   fclose(f);
   
+  return OK;
+}
+
+Erro carregar(Contato agenda[], int *pos) {
+  FILE *f = fopen("agenda.bin", "rb");
+  if (f == NULL)
+    return ABRIR;
+
+  int qtd = fread(agenda, TOTAL, sizeof(Contato), f);
+
+  qtd = fread(pos, 1, sizeof(int), f);
+
+  fclose(f);
+
   return OK;
 }
 

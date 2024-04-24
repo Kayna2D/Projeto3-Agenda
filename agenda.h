@@ -15,7 +15,8 @@ typedef enum Erros {
   ABRIR,
   ESCREVER, 
   LER,
-  FECHAR
+  FECHAR,
+  TEL_INVALIDO
 } Erro;
 
 typedef Erro (*funcao)(Contato[], int*);

@@ -20,32 +20,34 @@ int main() {
     printf("2 - Listar contatos\n");
     printf("3 - Deletar contatos\n");
     printf("0 - Sair\n");
-    printf("Entre com uma opção: ");
+    printf("Entre com uma opcao: ");
     
     scanf("%d", &opcao);
     clearBuffer();
     opcao--;
     
     if (opcao > 2)
-      printf("Opção inválida\n");
+      printf("Opcao invalida\n");
     else if (opcao >= 0) {
       erro = fs[opcao](agenda, &pos);
       if (opcao == 0){
         if (erro == MAX_CONTATOS)
           printf("Numero maximo de contatos atingido\n");
+        else if (erro == TEL_INVALIDO)
+          printf("Numero de telefone invalido\n");
         else
           printf("Contato criado com sucesso\n");
       }
         
       else if (opcao == 1){
         if (erro == SEM_CONTATOS)
-          printf("Não há contatos para listar\n");
+          printf("Nao ha contatos para listar\n");
    }
       else if (opcao == 2){
         if (erro == SEM_CONTATOS)
-          printf("Não há contatos para deletar\n");
+          printf("Nao ha contatos para deletar\n");
         else if (erro == NAO_ENCONTRADO)
-          printf("Contato não encontrado\n");
+          printf("Contato nao encontrado\n");
           }
     } else
       printf("Saindo...\n");

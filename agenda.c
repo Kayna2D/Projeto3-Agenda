@@ -93,10 +93,15 @@ Erro carregar(Contato agenda[], int *pos) {
     return ABRIR;
 
   int qtd = fread(agenda, TOTAL, sizeof(Contato), f);
+  if (qtd == 0)
+    return LER;
 
   qtd = fread(pos, 1, sizeof(int), f);
+  if (qtd == 0)
+    return LER;
 
-  fclose(f);
+  if (fclose(f))
+    return FECHAR;
 
   return OK;
 }

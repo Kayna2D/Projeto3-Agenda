@@ -10,7 +10,8 @@ int main() {
   if(erro == ABRIR){
     printf("Erro de leitura ou arquivo inexistente");
     pos = 0;
-  }
+  } else if (erro == FECHAR)
+    printf("Erro ao fechar arquivo");
   int opcao;
   
   do {

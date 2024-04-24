@@ -68,6 +68,44 @@ Erro deletar(Contato agenda[], int *pos) {
   return OK;
 }
 
+Erro salvar(Contato agenda[], int *pos) {
+  FILE *f = fopen("agenda.bin", "wb");
+  if (f == NULL)
+    return ABRIR;
+
+  int qtd = fwrite(agenda, TOTAL, sizeof(Contato), f);
+  if (qtd == 0)
+    return ESCREVER;
+
+  qtd = fwrite(pos, 1, sizeof(int), f);
+  if (qtd == 0)
+    return ESCREVER;
+  
+  if (fclose(f))
+    return FECHAR;
+  
+  return OK;
+}
+
+Erro carregar(Contato agenda[], int *pos) {
+  FILE *f = fopen("agenda.bin", "rb");
+  if (f == NULL)
+    return ABRIR;
+
+  int qtd = fread(agenda, TOTAL, sizeof(Contato), f);
+  if (qtd == 0)
+    return LER;
+
+  qtd = fread(pos, 1, sizeof(int), f);
+  if (qtd == 0)
+    return LER;
+
+  if (fclose(f))
+    return FECHAR;
+
+  return OK;
+}
+
 void clearBuffer() {
   int c;
   while ((c = getchar()) != '\n' && c != EOF)

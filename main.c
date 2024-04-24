@@ -2,12 +2,18 @@
 #include <stdio.h>
 
 int main() {
-  funcao fs[] = {criar, listar, deletar};
+  funcao fs[] = {criar, listar, deletar, salvar, carregar};
 
   int pos;
-  Erro erro;
-  int opcao;
   Contato agenda[TOTAL];
+  Erro erro = fs[4](agenda, &pos);
+  if(erro == ABRIR){
+    printf("Erro de leitura ou arquivo inexistente");
+    pos = 0;
+  } else if (erro == FECHAR)
+    printf("Erro ao fechar arquivo");
+  int opcao;
+  
   do {
     printf("\nMenu principal\n");
     printf("1 - Criar contato\n");
@@ -41,6 +47,18 @@ int main() {
         else if (erro == NAO_ENCONTRADO)
           printf("Contato não encontrado\n");
           }
-    } 
+    } else
+      printf("Saindo...\n");
   } while (opcao >= 0);
+
+  fs[3](agenda, &pos);
+  Erro erro_salvar = fs[3](agenda, &pos);
+  if (erro_salvar == ABRIR)
+    printf("Erro ao abrir arquivo\n");
+  else if (erro_salvar == ESCREVER)
+    printf("Erro ao salvar no arquivo\n");
+  else if (erro_salvar == FECHAR)
+    printf("Erro ao fechar arquivo\n");
+  else
+    printf("Arquivo salvo com sucesso!\n");
     }

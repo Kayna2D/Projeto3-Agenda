@@ -11,7 +11,11 @@ typedef enum Erros {
   OK,
   MAX_CONTATOS,
   SEM_CONTATOS,
-  NAO_ENCONTRADO
+  NAO_ENCONTRADO, 
+  ABRIR,
+  ESCREVER, 
+  LER,
+  FECHAR
 } Erro;
 
 typedef Erro (*funcao)(Contato[], int*);
@@ -19,5 +23,7 @@ typedef Erro (*funcao)(Contato[], int*);
 Erro criar(Contato agenda[], int *pos);
 Erro listar(Contato agenda[], int *pos);
 Erro deletar(Contato agenda[], int *pos);
+Erro salvar(Contato agenda[], int *pos);
+Erro carregar(Contato agenda[], int *pos);
 
 void clearBuffer();

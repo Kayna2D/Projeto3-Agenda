@@ -34,7 +34,6 @@ Erro listar(Contato agenda[], int *pos) {
     return SEM_CONTATOS;
 
   for(int i = 0; i < *pos; i++) {
-    printf("Pos: %d\t", i + 1);
     printf("Nome: %s\t", agenda[i].nome);
     printf("Sobrenome: %s\t", agenda[i].sobrenome);
     printf("E-mail: %s\t", agenda[i].email);
@@ -50,23 +49,32 @@ Erro deletar(Contato agenda[], int *pos) {
   if (*pos == 0)
     return SEM_CONTATOS;
 
-  int pos_deletar;
-  printf("Entre com a posicao do contato a ser deletado: ");
-  scanf("%d", &pos_deletar);
-  pos_deletar--; // garantir posicao certa no array
-  if (pos_deletar >= *pos || pos_deletar < 0)
+  char telefone[11];
+  int check = 0;
+
+  printf("Entre com o telefone de 11 digitos (apenas numeros): ");
+  scanf("%[^\n]", telefone);
+  clearBuffer();
+  if (strlen(telefone) != 11)
+    return TEL_INVALIDO;
+
+  for(int i = 0; i < *pos; i++) {
+    if (strcmp(agenda[i].telefone, telefone) == 0) {
+      *pos = *pos - 1;
+      check = 1;
+      for(int j = i; j < *pos; j++) {
+        strcpy(agenda[j].nome, agenda[j + 1].nome);
+        strcpy(agenda[j].sobrenome, agenda[j + 1].sobrenome);
+        strcpy(agenda[j].email, agenda[j + 1].email);
+        strcpy(agenda[j].telefone, agenda[j + 1].telefone);
+      }
+      break;
+    }
+  }
+  if (check == 0)
     return NAO_ENCONTRADO;
 
-  for (int i = pos_deletar; i < *pos; i++)
-    {
-      strcpy(agenda[i].nome, agenda[i + 1].nome);
-      strcpy(agenda[i].sobrenome, agenda[i + 1].sobrenome);
-      strcpy(agenda[i].email, agenda[i + 1].email);
-      strcpy(agenda[i].telefone, agenda[i + 1].telefone);
-    }
-
-    *pos = *pos - 1;
-
+  
   return OK;
 }
 

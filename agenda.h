@@ -4,7 +4,7 @@ typedef struct Contato {
   char nome[100];
   char sobrenome[300];
   char email[300];
-  char telefone[11];
+  char telefone[12];
 } Contato;
 
 typedef enum Erros {

@@ -18,7 +18,7 @@ int main() {
     printf("\nMenu principal\n");
     printf("1 - Criar contato\n");
     printf("2 - Listar contatos\n");
-    printf("3 - Deletar contatos\n");
+    printf("3 - Deletar contato\n");
     printf("0 - Sair\n");
     printf("Entre com uma opcao: ");
     
@@ -48,6 +48,10 @@ int main() {
           printf("Nao ha contatos para deletar\n");
         else if (erro == NAO_ENCONTRADO)
           printf("Contato nao encontrado\n");
+        else if (erro == TEL_INVALIDO)
+          printf("Numero de telefone invalido\n");
+        else
+          printf("Contato deletado com sucesso\n");
           }
     } else
       printf("Saindo...\n");

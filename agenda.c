@@ -1,6 +1,45 @@
 #include "agenda.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+int validar_char(char c) {
+  return (isalnum(c) || c == '.' || c == '-' || c == '_');
+}
+
+int validar_email(const char *email) {
+  const char *arroba = strchr(email, '@');
+  if (!arroba)
+    return 0;
+
+  const char *dom = arroba + 1;
+  if (strchr(dom, '@'))
+    return 0;
+
+  const char *ponto = strrchr(dom, '.');
+  if (!ponto)
+    return 0;
+
+  if (ponto == dom || ponto == dom + strlen(dom) - 1)
+    return 0;
+
+  for (const char *p = email; p < arroba; ++p) {
+    if (!validar_char(*p))
+      return 0;
+  }
+
+  for (const char *p = dom; p < ponto; ++p) {
+    if (!validar_char(*p))
+      return 0;
+  }
+
+  for (const char *p = ponto + 1; *p; ++p) {
+    if (!isalpha(*p))
+      return 0;
+  }
+
+  return 1;
+}
 
 Erro criar(Contato agenda[], int *pos) {
   if (*pos >= TOTAL)
@@ -17,7 +56,8 @@ Erro criar(Contato agenda[], int *pos) {
   printf("Entre com o e-mail: ");
   scanf("%[^\n]", agenda[*pos].email);
   clearBuffer();
-
+  if (!validar_email(agenda[*pos].email))
+    return EMAIL_INVALIDO;
   printf("Entre com o telefone de 11 digitos (apenas numeros): ");
   scanf("%[^\n]", agenda[*pos].telefone);
   clearBuffer();

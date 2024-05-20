@@ -34,7 +34,9 @@ int main() {
         if (erro == MAX_CONTATOS)
           printf("Numero maximo de contatos atingido\n");
         else if (erro == TEL_INVALIDO)
-          printf("Numero de telefone invalido\n");
+          printf("Numero de telefone invalido. Por favor, tente novamente\n");
+        else if (erro == EMAIL_INVALIDO)
+          printf("Email invalido. Por favor, tente novamente\n");
         else
           printf("Contato criado com sucesso\n");
       }

@@ -41,6 +41,15 @@ int validar_email(const char *email) {
   return 1;
 }
 
+int verificar_telefone_unico(Contato agenda[], int *pos, char *telefone) {
+  for (int i = 0; i < *pos; i++) {
+    if (strcmp(agenda[i].telefone, telefone) == 0)
+      return 0;
+  }
+
+  return 1;
+}
+
 Erro criar(Contato agenda[], int *pos) {
   if (*pos >= TOTAL)
     return MAX_CONTATOS;
@@ -63,6 +72,8 @@ Erro criar(Contato agenda[], int *pos) {
   clearBuffer();
   if (strlen(agenda[*pos].telefone) != 11)
     return TEL_INVALIDO;
+  else if (!verificar_telefone_unico(agenda, pos, agenda[*pos].telefone))
+    return TEL_EXISTENTE;
 
   *pos = *pos + 1;
 

@@ -17,7 +17,8 @@ typedef enum Erros {
   LER,
   FECHAR,
   TEL_INVALIDO,
-  EMAIL_INVALIDO
+  EMAIL_INVALIDO,
+  TEL_EXISTENTE
 } Erro;
 
 typedef Erro (*funcao)(Contato[], int*);
@@ -31,3 +32,4 @@ Erro carregar(Contato agenda[], int *pos);
 void clearBuffer();
 int validar_email(const char *telefone);
 int validar_char(char c);
+int verificar_telefone_unico(Contato agenda[], int *pos, char *telefone);

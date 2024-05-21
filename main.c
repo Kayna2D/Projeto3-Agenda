@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 int main() {
-  funcao fs[] = {criar, listar, deletar, salvar, carregar};
+  funcao fs[] = {criar, listar, deletar, alterar, salvar, carregar};
 
   int pos;
   Contato agenda[TOTAL];
-  Erro erro = fs[4](agenda, &pos);
+  Erro erro = fs[5](agenda, &pos);
   if(erro == ABRIR){
     printf("Erro de leitura ou arquivo inexistente");
     pos = 0;
@@ -19,6 +19,7 @@ int main() {
     printf("1 - Criar contato\n");
     printf("2 - Listar contatos\n");
     printf("3 - Deletar contato\n");
+    printf("4 - Alterar contato\n");
     printf("0 - Sair\n");
     printf("Entre com uma opcao: ");
     
@@ -26,7 +27,7 @@ int main() {
     clearBuffer();
     opcao--;
     
-    if (opcao > 2)
+    if (opcao > 3)
       printf("Opcao invalida\n");
     else if (opcao >= 0) {
       erro = fs[opcao](agenda, &pos);
@@ -57,12 +58,27 @@ int main() {
         else
           printf("Contato deletado com sucesso\n");
           }
-    } else
+
+      else if (opcao == 3){
+        if (erro == SEM_CONTATOS)
+          printf("Nao ha contatos para alterar\n");
+        else if (erro == NAO_ENCONTRADO)
+          printf("Contato nao encontrado\n");
+        else if (erro == TEL_INVALIDO)
+          printf("Numero de telefone invalido\n");
+        else if (erro == TEL_EXISTENTE)
+          printf("Telefone registrado. Por favor, tente novamente\n");
+        else if (erro == EMAIL_INVALIDO)
+          printf("Email invalido. Por favor, tente novamente\n");
+        else
+          printf("Voltando para o menu\n");
+    } 
+    }else
       printf("Saindo...\n");
   } while (opcao >= 0);
 
-  fs[3](agenda, &pos);
-  Erro erro_salvar = fs[3](agenda, &pos);
+  fs[4](agenda, &pos);
+  Erro erro_salvar = fs[4](agenda, &pos);
   if (erro_salvar == ABRIR)
     printf("Erro ao abrir arquivo\n");
   else if (erro_salvar == ESCREVER)

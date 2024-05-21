@@ -133,6 +133,91 @@ Erro deletar(Contato agenda[], int *pos) {
   return OK;
 }
 
+Erro alterar(Contato agenda[], int *pos) {
+  if (*pos == 0)
+    return SEM_CONTATOS;
+
+  char telefone[12];
+  int pos_alterar = -1;
+
+  printf("Entre com o telefone de 11 digitos (apenas numeros): ");
+  scanf("%[^\n]", telefone);
+  clearBuffer();
+  if (strlen(telefone) != 11)
+    return TEL_INVALIDO;
+
+  for (int i = 0; i < *pos; i++) {
+    if (strcmp(agenda[i].telefone, telefone) == 0) {
+      pos_alterar = i;
+      break;
+    }
+  }
+
+  if (pos_alterar >= *pos || pos_alterar < 0)
+    return NAO_ENCONTRADO;
+  else {
+    int opcao;
+    do {
+      printf("Qual campo deseja alterar?\n");
+      printf("1 - Nome\t");
+      printf("2 - Sobrenome\t");
+      printf("3 - E-mail\t");
+      printf("4 - Telefone\t");
+      printf("0 - Pronto!\n");
+      printf("Entre com uma opcao: ");
+      scanf("%d", &opcao);
+      clearBuffer();
+      opcao--;
+      if (opcao > 3)
+        printf("Opcao invalida\n");
+      else if (opcao == 0){
+        printf("Enter com o novo nome: ");
+        scanf("%[^\n]", agenda[pos_alterar].nome);
+        clearBuffer();
+        printf("\n");
+        }
+      else if (opcao == 1){
+        printf("Entre com o novo sobrenome: ");
+        scanf("%[^\n]", agenda[pos_alterar].sobrenome);
+        clearBuffer();
+        printf("\n");
+}
+      else if (opcao == 2){
+        char email[300];
+        printf("Entre com o novo e-mail: ");
+        scanf("%[^\n]", email);
+        clearBuffer();
+        if (!validar_email(email)){
+          printf("Email invalido. Por favor, tente novamente\n");
+          printf("\n");
+          }
+        else
+          strcpy(agenda[pos_alterar].email, email);
+} 
+      else if (opcao == 3){
+        char telefone[12];
+        printf("Entre com o novo telefone de 11 digitos (apenas numeros): ");
+        scanf("%[^\n]", telefone);
+        clearBuffer();
+        if (strlen(telefone) != 11)
+          printf("Telefone invalido. Por favor, tente novamente\n");
+        
+        if (!verificar_telefone_unico(agenda, pos, telefone)){
+          printf("Telefone ja registrado. Por favor, tente novamente\n");
+          }
+        else
+          strcpy(agenda[pos_alterar].telefone, telefone);
+        printf("\n");
+}
+// (!verificar_telefone_unico(agenda, pos, agenda[*pos].telefone)
+    } while (opcao >= 0);
+    
+    }
+  
+  return OK;
+
+}
+
 Erro salvar(Contato agenda[], int *pos) {
   FILE *f = fopen("agenda.bin", "wb");
   if (f == NULL)

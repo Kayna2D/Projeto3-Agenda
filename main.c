@@ -112,6 +112,5 @@ else if (erro_salvar == FECHAR)
 else
   printf("Arquivo salvo com sucesso!\n");
 
-  return 0;
   }
 

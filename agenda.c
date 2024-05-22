@@ -171,7 +171,7 @@ Erro alterar(Contato agenda[], int *pos) {
       if (opcao > 3)
         printf("Opcao invalida\n");
       else if (opcao == 0){
-        printf("Enter com o novo nome: ");
+        printf("Entre com o novo nome: ");
         scanf("%[^\n]", agenda[pos_alterar].nome);
         clearBuffer();
         printf("\n");
@@ -218,18 +218,37 @@ Erro alterar(Contato agenda[], int *pos) {
 
 }
 
-Erro salvar(Contato agenda[], int *pos) {
-  FILE *f = fopen("agenda.bin", "wb");
+Erro salvar(Contato agenda_pessoal[], int *pos_pessoal, Contato agenda_profissional[], int *pos_profissional) {
+  FILE *f = fopen("agenda_pessoal.bin", "wb");
   if (f == NULL)
     return ABRIR;
 
-  int qtd = fwrite(agenda, TOTAL, sizeof(Contato), f);
-  if (qtd == 0)
+  if (fwrite(pos_pessoal, sizeof(int), 1, f) != 1){
+    fclose(f);
     return ESCREVER;
+}
 
-  qtd = fwrite(pos, 1, sizeof(int), f);
-  if (qtd == 0)
+  if (fwrite(agenda_pessoal, sizeof(Contato), *pos_pessoal, f) != *pos_pessoal){
+    fclose(f);
     return ESCREVER;
+}
+
+  if (fclose(f))
+    return FECHAR;
+
+  f = fopen("agenda_profissional.bin", "wb");
+  if (f == NULL)
+    return ABRIR;
+
+  if (fwrite(pos_profissional, sizeof(int), 1, f) != 1){
+    fclose(f);
+    return ESCREVER;
+}
+
+  if (fwrite(agenda_profissional, sizeof(Contato), *pos_profissional, f) != *pos_profissional){
+    fclose(f);
+    return ESCREVER;
+}
 
   if (fclose(f))
     return FECHAR;
@@ -237,18 +256,37 @@ Erro salvar(Contato agenda[], int *pos) {
   return OK;
 }
 
-Erro carregar(Contato agenda[], int *pos) {
-  FILE *f = fopen("agenda.bin", "rb");
+Erro carregar(Contato agenda_pessoal[], int *pos_pessoal, Contato agenda_profissional[], int *pos_profissional) {
+  FILE *f = fopen("agenda_pessoal.bin", "rb");
   if (f == NULL)
     return ABRIR;
 
-  int qtd = fread(agenda, TOTAL, sizeof(Contato), f);
-  if (qtd == 0)
+  if (fread(pos_pessoal, sizeof(int), 1, f) != 1){
+    fclose(f);
     return LER;
+}
+  
+  if (fread(agenda_pessoal, sizeof(Contato), *pos_pessoal, f) != *pos_pessoal){
+    fclose(f);    
+    return LER;
+}
 
-  qtd = fread(pos, 1, sizeof(int), f);
-  if (qtd == 0)
+  if (fclose(f))
+    return FECHAR;
+
+  f = fopen("agenda_profissional.bin", "rb");
+  if (f == NULL)
+    return ABRIR;
+
+  if (fread(pos_profissional, sizeof(int), 1, f) != 1){
+    fclose(f);
     return LER;
+}
+
+  if (fread(agenda_profissional, sizeof(Contato), *pos_profissional, f) != *pos_profissional){
+    fclose(f);
+    return LER;
+  }
 
   if (fclose(f))
     return FECHAR;
@@ -261,3 +299,4 @@ void clearBuffer() {
   while ((c = getchar()) != '\n' && c != EOF)
     ;
 }
+
